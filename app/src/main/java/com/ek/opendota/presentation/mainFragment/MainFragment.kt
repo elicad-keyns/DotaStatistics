@@ -1,28 +1,20 @@
 package com.ek.opendota.presentation.mainFragment
 
-import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.ek.opendota.R
-import com.ek.opendota.data.common.DEBUG_STEAM_ID
 import com.ek.opendota.data.net.matches.Match
 import com.ek.opendota.data.net.player.Player
 import com.ek.opendota.data.net.wl.WL
-import com.ek.opendota.presentation.mainActivity.MainActivity
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_player.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -31,6 +23,8 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
     @InjectPresenter
     lateinit var mainFPresenter: MainFPresenter
 
+    lateinit var player: Player
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -38,13 +32,13 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
     override fun onStart() {
         super.onStart()
         onGetAccountInfo()
+        llAccount.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_playerFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cvAccount.setOnClickListener{
-
-        }
     }
 
     private fun onGetAccountInfo() {
@@ -56,6 +50,7 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
     }
 
     override fun setResultPlayer(player: Player) {
+        this.player = player
         tvPlayerName.text = "Name: ${player.profile?.personaname}"
         tvPlayerMMR.text = "MMR: ${player.mmr_estimate?.estimate.toString()}"
         Glide.with(this).load(player.profile?.avatarfull).into(ivPlayerAvatar)
@@ -77,8 +72,6 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
     }
 
     private fun setLastMatch(iv: ImageView, tv: TextView, card: RelativeLayout, match: Match) {
-        Log.d("HERO_ID", match.hero_id.toString())
-        Log.d("HERO_ID", getHeroImgByName(match.hero_id).toString())
         iv.setImageDrawable(ContextCompat.getDrawable(requireContext(), getHeroImgByName(match.hero_id)))
         tv.text = match.kills.toString() + "/" + match?.deaths + "/" + match?.assists
         if (match.radiant_win && match.player_slot < 100)

@@ -20,8 +20,5 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), IMainView {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-
-        val navController = findNavController(R.id.mainFrame)
-        bnbMain.setupWithNavController(navController)
     }
 }

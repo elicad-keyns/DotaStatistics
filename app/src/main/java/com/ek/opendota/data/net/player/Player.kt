@@ -10,4 +10,6 @@ data class Player (
     @SerializedName("leaderboard_rank") val leaderboard_rank : Int? = null,
     @SerializedName("mmr_estimate") val mmr_estimate : MmrEstimate? = null,
     @SerializedName("profile") val profile : Profile? = null
-)
+) {
+    companion object {}
+}

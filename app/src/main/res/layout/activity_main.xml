@@ -14,24 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        android:layout_marginBottom="56dp"
         app:navGraph="@navigation/mobile_navigation">
 
     </androidx.fragment.app.FragmentContainerView>
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bnbMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hideOnScroll="true"
-        android:layout_gravity="bottom"
-        app:menu="@menu/bnb_main_menu"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        app:layout_anchor="@id/bnbMain"
-        android:src="@drawable/ic_add"
-        android:id="@+id/fab_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

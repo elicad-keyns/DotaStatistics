@@ -23,7 +23,7 @@ class MainPresenter: MvpPresenter<IMainView>() {
             .getPlayer(playerId)
             .enqueue(object : Callback<Player> {
                 override fun onFailure(call: Call<Player>, t: Throwable) {
-                    Log.d("MAIN_PRESENTER_EXC", t.localizedMessage)
+                    Log.d("MAIN_PRESENTER_EXC", t.localizedMessage!!)
                 }
 
                 override fun onResponse(

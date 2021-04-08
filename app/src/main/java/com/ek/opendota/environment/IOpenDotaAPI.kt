@@ -16,7 +16,7 @@ interface IOpenDotaAPI {
     @GET(OPEN_DOTA_BASE_URL + "players/{accountId}/matches")
     fun getMatches(@Path("accountId") accountId: String?): Call<Match>
 
-    @GET(OPEN_DOTA_BASE_URL + "players/{accountId}/matches")
+    @GET(OPEN_DOTA_BASE_URL + "players/{accountId}/recentMatches")
     fun getMatchesByLimit(
         @Path("accountId") accountId: String?,
         @Query("limit") limit: Int?
