@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bnb_account"
+        android:icon="@drawable/ic_account_circle"
+        android:title="Account"
+        app:showAsAction="always"
+        android:iconTint="@color/white"/>
+
+    <item
+        android:id="@+id/bnb_matches"
+        android:icon="@drawable/ic_history"
+        android:title="Matches"
+        app:showAsAction="always"
+        android:iconTint="@color/white"/>
+
+</menu>
