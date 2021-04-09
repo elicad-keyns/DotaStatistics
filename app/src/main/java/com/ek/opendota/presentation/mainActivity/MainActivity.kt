@@ -14,10 +14,6 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), IMainView {
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
     }

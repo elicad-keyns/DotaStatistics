@@ -25,20 +25,12 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
 
     lateinit var player: Player
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         onGetAccountInfo()
         llAccount.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_playerFragment)
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun onGetAccountInfo() {
@@ -74,10 +66,17 @@ class MainFragment : MvpAppCompatFragment(R.layout.fragment_main), IMainFView {
     private fun setLastMatch(iv: ImageView, tv: TextView, card: RelativeLayout, match: Match) {
         iv.setImageDrawable(ContextCompat.getDrawable(requireContext(), getHeroImgByName(match.hero_id)))
         tv.text = match.kills.toString() + "/" + match?.deaths + "/" + match?.assists
-        if (match.radiant_win && match.player_slot < 100)
-            card.setBackgroundResource(R.drawable.row_win)
-        else
-            card.setBackgroundResource(R.drawable.row_lose)
+        if (match.player_slot < 100) {
+            if (match.radiant_win)
+                card.setBackgroundResource(R.drawable.row_win)
+            else
+                card.setBackgroundResource(R.drawable.row_lose)
+        } else {
+            if (match.radiant_win)
+                card.setBackgroundResource(R.drawable.row_lose)
+            else
+                card.setBackgroundResource(R.drawable.row_win)
+        }
     }
 
     private fun getHeroImgByName(hero_id: Int) =
